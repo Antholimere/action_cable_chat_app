@@ -1,5 +1,3 @@
-require 'test_helper'
-
 class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   def setup
@@ -19,13 +17,13 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should handle invalid message" do
     login_as @user
-    post messages_url, params: { message: { content: "" } }
+    post messages_url, params: { message: { content: "" } }, xhr: true
     assert_response :success
   end
 
   test "should create valid message" do
     login_as @user
-    post messages_url, params: { message: { content: "Lorem" } }
-    assert_response :redirect
+    post messages_url, params: { message: { content: "Lorem" } }, xhr: true
+    assert_response :success
   end
 end
